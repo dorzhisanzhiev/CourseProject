@@ -1,0 +1,81 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Шифр Виженера</h1>
+    <form method="post" enctype="multipart/form-data">
+        <p>Загрузить исходный текст из файла .txt или .docx:</p>
+        <input type="file" accept=".docx,.txt" asp-for="Upload" required/>
+        <input type="submit" asp-page-handler="UploadFile"/>
+    </form>
+    <hr/>
+    <form method="post">
+        <p>Ввести исходный текст вручную:</p>
+        <p><textarea rows="4" cols="174" name="Input" required placeholder="бщцфаирщри, бл ячъбиуъ щбюэсяёш гфуаа!!! у ъящэячэц ъэюоык, едщ бдв саэацкшгнбяр гчеа кчфцшубп цу ьгщпя вщвсящ, эвэчрысй юяуъщнщхо шпуъликугбз чъцшья с цощъвчщ ъфмес ю лгюлэ ёъяяр! с моыящш шпмоец щаярдш цяэубфъ аьгэотызуа дщ, щръ кй юцкъщчьуац уыхэцэ ясч юбюяуяг ыовзсгюамщщ. внютвж тхыч эядкъябе цн юкъль, мэсццогл шяьфыоэьь ть эщсщжнашанэ ыюцен, уёюяыцчан мах гъъьуун шпмоыъй ч яяьпщъхэтпык яущм бпйэае! чэьюмуд, оээ скфч саьбрвчёыа эядуцйт ъ уьгфщуяяёу фси а эацэтшцэч юпапёи, ьь уъубфмч ысь хффы ужц чьяцнааущ эгъщйаъф, ч п эиттпьк ярвчг гмубзньцы! щб ьшяо шачюрэсч FirstLineSoftware ц ешчтфщацдпбр шыыь, р ыоф ячцсвкрщве бттй а ядсецсцкюкх эшашёрэсуъ якжще увюгщр в# уфн ысвчюпжзцж! чй ёюычъ бщххыибй еьюхечр п хкъмэншёцч юятщвфцшчщ с хчю ъэ ч аачсюсчыщачрняун в шъюьэжцясиьццч агфуо ацаьяычсцы .Net, чэбф ыуюбпьщо с чыдпяхбцйг щктрж!"></textarea></p>
+        <p><input type="submit" asp-page-handler="Enter"/></p>
+    </form>
+    <hr/>
+    <p>Исходный текст:</p>
+    <div style="height: 100px; overflow: scroll; overflow-x:hidden; border: 1px solid black;">
+        <table>
+            <tr>
+            <td>
+                @Model.Input
+            </td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <form method="post">
+        <table>
+            <tr>
+                <td>Ключ: </td>
+                <td><input type="text" id="txtKey" name="Key" required value="скорпион"/></td>
+                <td></td>
+                <td><input type="submit" value="Зашифровать" asp-page-handler="Encrypt"/></td>
+                <td></td>
+                <td><input type="submit" value="Расшифровать" asp-page-handler="Decrypt"/></td>
+            </tr>
+        </table>
+    </form>
+    <hr/>
+    <p>Зашифровка/Расшифровка:</p>
+    <div style="height: 100px; overflow: scroll; overflow-x:hidden; border: 1px solid black;">
+        <table>
+            <tr>
+            <td>
+                @Model.Output
+            </td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <p>Сохранить зашифровку/расшифровку:</p>
+    <form method="post">
+        <table>
+            <tr>
+                <td>Директория: </td>
+                <td><input type="text" id="txtFileDirectory" name="FileDirectory" required value="./uploads/"/></td>
+            </tr>
+            <tr>
+                <td>Имя файла: </td>
+                <td><input type="text" id="txtFileName" name="FileName" required value="Result"/></td>
+            </tr>
+            <tr>
+                <td>Расширение файла (.docx или .txt): </td>
+                <td><input type="text" id="txtExtension" name="Extension" required pattern="\.txt|\.docx" value=".txt"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Сохранить" asp-page-handler="Save"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@Model.SaveResult</td>
+            </tr>
+        </table>
+    </form>
+</div>
